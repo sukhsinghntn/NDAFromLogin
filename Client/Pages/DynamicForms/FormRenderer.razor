@@ -162,30 +162,35 @@ else
     private Form form;
     private Dictionary<string, object> responseData = new();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var user = await CookieHelper.LoginStatus();
-        if (string.IsNullOrEmpty(user))
+        if (firstRender)
         {
-            var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
-            Navigation.NavigateTo($"login?returnUrl={ret}", true);
-            return;
-        }
-
-        form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
-
-        foreach (var fld in form.Fields)
-        {
-            responseData[fld.Key] = fld.FieldType switch
+            var user = await CookieHelper.LoginStatus();
+            if (string.IsNullOrEmpty(user))
             {
-                "checkbox" => new List<string>(),
-                "number" => (object?)null,
-                "date" => (object?)null,
-                "time" => (object?)null,
-                "datetime" => (object?)null,
-                "file" => "",
-                _ => string.Empty
-            };
+                var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
+                Navigation.NavigateTo($"login?returnUrl={ret}", true);
+                return;
+            }
+
+            form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
+
+            foreach (var fld in form.Fields)
+            {
+                responseData[fld.Key] = fld.FieldType switch
+                {
+                    "checkbox" => new List<string>(),
+                    "number" => (object?)null,
+                    "date" => (object?)null,
+                    "time" => (object?)null,
+                    "datetime" => (object?)null,
+                    "file" => "",
+                    _ => string.Empty
+                };
+            }
+
+            StateHasChanged();
         }
     }
 

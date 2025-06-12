@@ -82,14 +82,16 @@
     private string formName = string.Empty;
     private List<DesignerField> fields = new();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var user = await CookieHelper.LoginStatus();
-        if (string.IsNullOrEmpty(user))
+        if (firstRender)
         {
-            var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
-            Navigation.NavigateTo($"login?returnUrl={ret}", true);
-            return;
+            var user = await CookieHelper.LoginStatus();
+            if (string.IsNullOrEmpty(user))
+            {
+                var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
+                Navigation.NavigateTo($"login?returnUrl={ret}", true);
+            }
         }
     }
 

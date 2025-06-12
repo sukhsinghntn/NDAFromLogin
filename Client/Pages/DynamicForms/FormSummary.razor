@@ -69,18 +69,23 @@ else
     private Form form;
     private List<Dictionary<string, object>> responses;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var user = await CookieHelper.LoginStatus();
-        if (string.IsNullOrEmpty(user))
+        if (firstRender)
         {
-            var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
-            Navigation.NavigateTo($"login?returnUrl={ret}", true);
-            return;
-        }
+            var user = await CookieHelper.LoginStatus();
+            if (string.IsNullOrEmpty(user))
+            {
+                var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
+                Navigation.NavigateTo($"login?returnUrl={ret}", true);
+                return;
+            }
 
-        form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
-        responses = await Http.GetFromJsonAsync<List<Dictionary<string, object>>>($"api/forms/{FormId}/responses");
+            form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
+            responses = await Http.GetFromJsonAsync<List<Dictionary<string, object>>>($"api/forms/{FormId}/responses");
+
+            StateHasChanged();
+        }
     }
 
     private double? TryDouble(Dictionary<string, object> row, string key)

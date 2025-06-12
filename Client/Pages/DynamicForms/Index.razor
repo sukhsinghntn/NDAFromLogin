@@ -88,22 +88,22 @@ else
     private bool isPreviewMode = false;
     private DotNetObjectReference<Index>? objRef;
 
-    protected override async Task OnInitializedAsync()
-    {
-        var user = await CookieHelper.LoginStatus();
-        if (string.IsNullOrEmpty(user))
-        {
-            var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
-            Navigation.NavigateTo($"login?returnUrl={ret}", true);
-            return;
-        }
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        objRef ??= DotNetObjectReference.Create(this);
-        await JS.InvokeVoidAsync("initSortable", "#fields-container", objRef);
-        await JS.InvokeVoidAsync("initFieldDragDrop", "#fields-container", objRef);
+        if (firstRender)
+        {
+            var user = await CookieHelper.LoginStatus();
+            if (string.IsNullOrEmpty(user))
+            {
+                var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
+                Navigation.NavigateTo($"login?returnUrl={ret}", true);
+                return;
+            }
+
+            objRef ??= DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("initSortable", "#fields-container", objRef);
+            await JS.InvokeVoidAsync("initFieldDragDrop", "#fields-container", objRef);
+        }
     }
 
     [JSInvokable]

@@ -80,21 +80,26 @@
     private List<Dictionary<string, object>> responses;
     private string[] columns = Array.Empty<string>();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var user = await CookieHelper.LoginStatus();
-        if (string.IsNullOrEmpty(user))
+        if (firstRender)
         {
-            var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
-            Navigation.NavigateTo($"login?returnUrl={ret}", true);
-            return;
+            var user = await CookieHelper.LoginStatus();
+            if (string.IsNullOrEmpty(user))
+            {
+                var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
+                Navigation.NavigateTo($"login?returnUrl={ret}", true);
+                return;
+            }
+
+            form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
+            responses = await Http.GetFromJsonAsync<List<Dictionary<string, object>>>($"api/forms/{FormId}/responses");
+
+            var fieldKeys = form.Fields.Select(f => f.Key);
+            columns = new[] { "ResponseId", "CreatedAt" }.Concat(fieldKeys).ToArray();
+
+            StateHasChanged();
         }
-
-        form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
-        responses = await Http.GetFromJsonAsync<List<Dictionary<string, object>>>($"api/forms/{FormId}/responses");
-
-        var fieldKeys = form.Fields.Select(f => f.Key);
-        columns = new[] { "ResponseId", "CreatedAt" }.Concat(fieldKeys).ToArray();
     }
 
     private bool IsFileField(string key)
