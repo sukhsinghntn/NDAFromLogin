@@ -4,6 +4,7 @@
 @using Microsoft.AspNetCore.Components
 @inject HttpClient Http
 @inject NavigationManager Navigation
+@inject CookieHelper CookieHelper
 
 <div class="container mt-4">
     <h2 class="mb-4">📄 Responses: <span class="text-primary">@form?.Name</span></h2>
@@ -81,6 +82,14 @@
 
     protected override async Task OnInitializedAsync()
     {
+        var user = await CookieHelper.LoginStatus();
+        if (string.IsNullOrEmpty(user))
+        {
+            var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
+            Navigation.NavigateTo($"login?returnUrl={ret}", true);
+            return;
+        }
+
         form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
         responses = await Http.GetFromJsonAsync<List<Dictionary<string, object>>>($"api/forms/{FormId}/responses");
 

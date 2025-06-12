@@ -20,7 +20,12 @@ namespace DynamicFormsApp.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateFormDto dto)
         {
-            var newFormId = await _svc.CreateFormAsync(dto.Name, dto.Fields);
+            if (!Request.Cookies.TryGetValue("userName", out var user) || string.IsNullOrEmpty(user))
+            {
+                return Unauthorized();
+            }
+
+            var newFormId = await _svc.CreateFormAsync(dto.Name, dto.Fields, user);
             return Ok(new { FormId = newFormId });
         }
 
@@ -52,9 +57,14 @@ namespace DynamicFormsApp.Server.Controllers
         [HttpPost("api/forms")]
         public async Task<IActionResult> CreateForm([FromBody] CreateFormDto dto)
         {
+            if (!Request.Cookies.TryGetValue("userName", out var user) || string.IsNullOrEmpty(user))
+            {
+                return Unauthorized();
+            }
+
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var formId = await _svc.CreateFormAsync(dto.Name, dto.Fields);
+            var formId = await _svc.CreateFormAsync(dto.Name, dto.Fields, user);
             return Ok(new { formId });
         }
 

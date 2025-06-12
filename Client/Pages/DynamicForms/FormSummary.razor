@@ -3,6 +3,7 @@
 @using System.Text.Json
 @using DynamicFormsApp.Shared.Models
 @inject HttpClient Http
+@inject CookieHelper CookieHelper
 
 <h3>Summary for @form?.Name</h3>
 
@@ -70,6 +71,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        var user = await CookieHelper.LoginStatus();
+        if (string.IsNullOrEmpty(user))
+        {
+            var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
+            Navigation.NavigateTo($"login?returnUrl={ret}", true);
+            return;
+        }
+
         form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
         responses = await Http.GetFromJsonAsync<List<Dictionary<string, object>>>($"api/forms/{FormId}/responses");
     }

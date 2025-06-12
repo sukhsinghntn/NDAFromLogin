@@ -7,5 +7,6 @@ namespace DynamicFormsApp.Server.Services
     {
         public string Name { get; set; }
         public List<FormField> Fields { get; set; }
+        public string? CreatedBy { get; set; }
     }
 }

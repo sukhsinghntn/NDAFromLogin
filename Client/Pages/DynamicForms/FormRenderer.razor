@@ -5,6 +5,7 @@
 @using DynamicFormsApp.Shared.Models
 @inject HttpClient Http
 @inject NavigationManager Navigation
+@inject CookieHelper CookieHelper
 
 <h3>@(form?.Name ?? "Loading…")</h3>
 
@@ -163,6 +164,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        var user = await CookieHelper.LoginStatus();
+        if (string.IsNullOrEmpty(user))
+        {
+            var ret = Uri.EscapeDataString(Navigation.ToBaseRelativePath(Navigation.Uri));
+            Navigation.NavigateTo($"login?returnUrl={ret}", true);
+            return;
+        }
+
         form = await Http.GetFromJsonAsync<Form>($"api/forms/{FormId}");
 
         foreach (var fld in form.Fields)
