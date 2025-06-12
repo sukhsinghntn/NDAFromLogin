@@ -124,6 +124,14 @@ namespace DynamicFormsApp.Server.Services
                 .ToListAsync();
         }
 
+        public async Task<List<Form>> GetFormsByUserAsync(string user)
+        {
+            return await _db.Forms
+                .Include(f => f.Fields)
+                .Where(f => f.CreatedBy == user)
+                .ToListAsync();
+        }
+
         public async Task<List<Dictionary<string, object>>> GetResponsesAsync(int formId)
         {
             var form = await _db.Forms.FindAsync(formId)

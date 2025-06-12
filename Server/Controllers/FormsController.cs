@@ -54,18 +54,16 @@ namespace DynamicFormsApp.Server.Controllers
             return Ok(all);
         }
 
-        [HttpPost("api/forms")]
-        public async Task<IActionResult> CreateForm([FromBody] CreateFormDto dto)
+        [HttpGet("mine")]
+        public async Task<ActionResult<IEnumerable<Form>>> GetMine()
         {
             if (!Request.Cookies.TryGetValue("userName", out var user) || string.IsNullOrEmpty(user))
             {
                 return Unauthorized();
             }
 
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            var formId = await _svc.CreateFormAsync(dto.Name, dto.Fields, user);
-            return Ok(new { formId });
+            var mine = await _svc.GetFormsByUserAsync(user);
+            return Ok(mine);
         }
 
         // POST /api/forms/{id}/responses
