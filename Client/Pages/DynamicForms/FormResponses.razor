@@ -5,6 +5,7 @@
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject CookieHelper CookieHelper
+@inject IJSRuntime JS
 
 <div class="container mt-4">
     <h2 class="mb-4">📄 Responses: <span class="text-primary">@form?.Name</span></h2>
@@ -19,8 +20,12 @@
     }
     else
     {
+        <div class="mb-3">
+            <button class="btn btn-outline-info me-2" @onclick="DownloadCsv">Download CSV</button>
+            <button class="btn btn-outline-info" @onclick="DownloadPdf">Download PDF</button>
+        </div>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover align-middle">
+            <table id="responsesTable" class="table table-bordered table-hover align-middle">
                 <thead class="table-light">
                     <tr>
                         @foreach (var col in columns)
@@ -114,5 +119,15 @@
         return lower.EndsWith(".jpg") || lower.EndsWith(".jpeg") ||
                lower.EndsWith(".png") || lower.EndsWith(".gif") ||
                lower.EndsWith(".bmp") || lower.EndsWith(".webp");
+    }
+
+    private async Task DownloadCsv()
+    {
+        await JS.InvokeVoidAsync("downloadTableCsv", "responsesTable", $"{form?.Name ?? "responses"}.csv");
+    }
+
+    private async Task DownloadPdf()
+    {
+        await JS.InvokeVoidAsync("exportTableToPdf", "responsesTable", $"{form?.Name ?? "responses"}.pdf");
     }
 }

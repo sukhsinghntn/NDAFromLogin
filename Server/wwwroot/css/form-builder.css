@@ -56,3 +56,27 @@
     background: #f8f9fa;
     padding: 0 4px;
 }
+
+/* Dark mode overrides */
+body[data-bs-theme="dark"] {
+    background-color: #212529;
+    color: #f8f9fa;
+}
+body[data-bs-theme="dark"] .draggable-field {
+    background-color: #343a40;
+    border-color: #495057;
+}
+body[data-bs-theme="dark"] .draggable-field:hover {
+    background-color: #495057;
+}
+body[data-bs-theme="dark"] #canvas {
+    background-color: #343a40;
+    border-color: #495057;
+}
+body[data-bs-theme="dark"] .row-dropzone {
+    border-top-color: #495057;
+}
+body[data-bs-theme="dark"] .row-dropzone::after {
+    background: #343a40;
+    color: #adb5bd;
+}
