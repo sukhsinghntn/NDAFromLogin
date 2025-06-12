@@ -1,0 +1,6 @@
+wwwroot\css\app.css
+wwwroot\css\form-builder.css
+wwwroot\index.html
+wwwroot\js\chartInterop.js
+wwwroot\js\dragdrop-wrapper.js
+wwwroot\js\sortable-wrapper.js

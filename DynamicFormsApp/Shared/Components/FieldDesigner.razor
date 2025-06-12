@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Components
+@code {
+    [Parameter] public int Index { get; set; }
+    [Parameter] public string Key { get; set; }
+    [Parameter] public string Label { get; set; }
+    [Parameter] public string FieldType { get; set; }
+    [Parameter] public string Options { get; set; }
+    [Parameter] public bool IsRequired { get; set; }
+
+    [Parameter] public EventCallback OnDelete { get; set; }
+    [Parameter] public EventCallback<string> KeyChanged { get; set; }
+    [Parameter] public EventCallback<string> LabelChanged { get; set; }
+    [Parameter] public EventCallback<string> FieldTypeChanged { get; set; }
+    [Parameter] public EventCallback<string> OptionsChanged { get; set; }
+    [Parameter] public EventCallback<bool> IsRequiredChanged { get; set; }
+}
+
+<div class="card mb-3 shadow-sm border-start border-5 border-primary" data-index="@Index">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="drag-handle me-2" title="Drag to reorder">☰</span>
+            <input type="text" class="form-control form-control-sm"
+                   placeholder="Question/Label"
+                   value="@Label"
+                   @onchange="e => LabelChanged.InvokeAsync(e.Value?.ToString())" />
+            <button class="btn btn-sm btn-outline-danger ms-2" @onclick="OnDelete">
+                <i class="bi bi-trash"></i>
+            </button>
+        </div>
+
+        <div class="row g-2 align-items-center">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Field key"
+                       value="@Key"
+                       @onchange="e => KeyChanged.InvokeAsync(e.Value?.ToString())" />
+            </div>
+            <div class="col-md-4">
+                <select class="form-select" value="@FieldType"
+                        @onchange="e => FieldTypeChanged.InvokeAsync(e.Value?.ToString())">
+                    <option value="text">Short Answer</option>
+                    <option value="textarea">Paragraph</option>
+                    <option value="radio">Multiple Choice</option>
+                    <option value="checkbox">Checkbox</option>
+                    <option value="dropdown">Dropdown</option>
+                    <option value="date">Date</option>
+                    <option value="time">Time</option>
+                    <option value="datetime">Date Time</option>
+                    <option value="scale">Linear Scale</option>
+                    <option value="grid_radio">Multiple Choice Grid</option>
+                    <option value="grid_checkbox">Checkbox Grid</option>
+                    <option value="title">Title</option>
+                    <option value="section">Section</option>
+                    <option value="file">File Upload</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control"
+                       placeholder="Options (comma-separated)"
+                       value="@Options"
+                       @onchange="e => OptionsChanged.InvokeAsync(e.Value?.ToString() ?? " ")" />
+            </div>
+        </div>
+
+        <div class="form-check mt-2">
+            <input class="form-check-input" type="checkbox"
+                   checked="@IsRequired"
+                   @onchange="e => IsRequiredChanged.InvokeAsync((bool?)e.Value == true)" />
+            <label class="form-check-label">Required</label>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Server\\wwwroot\\uploads\\c50a640a-c8c9-46b4-b7b4-31a09b715d62_Screenshot 2024-10-18 141837.png",
+      "PackagePath": "staticwebassets\\uploads\\c50a640a-c8c9-46b4-b7b4-31a09b715d62_Screenshot 2024-10-18 141837.png"
+    },
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Server\\wwwroot\\uploads\\f6377ee4-af08-4f3e-b7ea-00db4e96f27c_Screenshot 2024-10-18 074555.png",
+      "PackagePath": "staticwebassets\\uploads\\f6377ee4-af08-4f3e-b7ea-00db4e96f27c_Screenshot 2024-10-18 074555.png"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.DynamicFormsApp.Server.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.DynamicFormsApp.Server.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.DynamicFormsApp.Server.props",
+      "PackagePath": "build\\DynamicFormsApp.Server.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.DynamicFormsApp.Server.props",
+      "PackagePath": "buildMultiTargeting\\DynamicFormsApp.Server.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.DynamicFormsApp.Server.props",
+      "PackagePath": "buildTransitive\\DynamicFormsApp.Server.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

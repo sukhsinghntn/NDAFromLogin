@@ -1,0 +1,53 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Client\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Client\\wwwroot\\css\\form-builder.css",
+      "PackagePath": "staticwebassets\\css\\form-builder.css"
+    },
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Client\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Client\\wwwroot\\js\\chartInterop.js",
+      "PackagePath": "staticwebassets\\js\\chartInterop.js"
+    },
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Client\\wwwroot\\js\\dragdrop-wrapper.js",
+      "PackagePath": "staticwebassets\\js\\dragdrop-wrapper.js"
+    },
+    {
+      "Id": "C:\\Users\\ssingh\\Desktop\\DynamicFormsApp\\DynamicFormsApp\\DynamicFormsApp\\Client\\wwwroot\\js\\sortable-wrapper.js",
+      "PackagePath": "staticwebassets\\js\\sortable-wrapper.js"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.DynamicFormsApp.Client.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.DynamicFormsApp.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.DynamicFormsApp.Client.props",
+      "PackagePath": "build\\DynamicFormsApp.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.DynamicFormsApp.Client.props",
+      "PackagePath": "buildMultiTargeting\\DynamicFormsApp.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.DynamicFormsApp.Client.props",
+      "PackagePath": "buildTransitive\\DynamicFormsApp.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

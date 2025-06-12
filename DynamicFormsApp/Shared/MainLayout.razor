@@ -1,0 +1,27 @@
+@inherits LayoutComponentBase
+
+<div class="d-flex flex-column vh-100">
+    <!-- optional: your top nav / header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">My App</a>
+            <!-- add your nav links here -->
+        </div>
+    </nav>
+
+    <!-- main content -->
+    <main class="flex-grow-1 py-4">
+        <div class="container">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    @Body
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- optional: footer -->
+    <footer class="bg-light text-center py-3">
+        © 2025 Your Company
+    </footer>
+</div>
